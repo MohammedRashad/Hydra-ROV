@@ -1,5 +1,6 @@
 # ROV-Controller-Android-to-PIC
 
+
 **This project is work for Admiral Team (from Engineering Faculty, Suez canal university).**
 
 **This project was made for MATE ROV competition.**
@@ -9,8 +10,8 @@
 **This project consists of 3 stages :-**
 
 1- Android controller.
-2- PC Bridge.
-3-PIC Microcontroller app.
+   2- PC Bridge.
+   3-PIC Microcontroller app.
 
 **Work Flow :-**
 

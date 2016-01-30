@@ -9,9 +9,9 @@
 
 **This project consists of 3 stages :-**
 
-1- Android controller.
-   2- PC Bridge.
-   3-PIC Microcontroller app.
+   - Android controller.
+   - PC Bridge.
+   - PIC Microcontroller app.
 
 **Work Flow :-**
 

@@ -4,7 +4,7 @@
 
 ===================================
 
-**This project is work for Admiral Team (Facultyof Engineering, Suez Canal University).**
+**This project is work for Admiral Team (Faculty of Engineering, Suez Canal University).**
 
 **This project was made for MATE ROV competition.**
 
@@ -62,3 +62,6 @@
         - Data Transmission is via UDP
        
         - Written in MikroC
+        
+
+**Project signed under GNU Public License v3.0**

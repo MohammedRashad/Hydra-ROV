@@ -64,6 +64,8 @@
         - Written in MikroC
         
 
+=============================================================
+
 Code is available for educational purposes and you may re-use it according to the terms of the license.
 
 **Project is signed under GNU Public License v3.0**

@@ -7,11 +7,13 @@
 ===================================
 
 **This project consists of 3 stages :-**
+
 1- Android controller.
 2- PC Bridge.
 3-PIC Microcontroller app.
 
 **Work Flow :-**
+
 Via any android phone you can control the robot via usb cable to PC or wifi/bluetooth network.
 
 PC bridge handles the orders then send them to the PIC MCU via Ethernet using UDP.

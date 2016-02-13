@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rov.bridge;
 
 import java.awt.Dimension;
@@ -26,6 +21,9 @@ public class BT extends javax.swing.JFrame {
     static int newH, newW;
     static Thread thread;
 
+    static byte dataSent[] ={0,0,0};
+    
+    
     /**
      * Creates new form BT
      */
@@ -302,7 +300,14 @@ public class BT extends javax.swing.JFrame {
         line = "";
 
         try {
+            
+            //Setting TCP/IP connection via wifi or bluetooth
+            process3  = Runtime.getRuntime().exec("/home/rashad/Documents/Workspace/Android-IDE/Android-Eclipse/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb usb");
+            process3  = Runtime.getRuntime().exec("/home/rashad/Documents/Workspace/Android-IDE/Android-Eclipse/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb tcpip 5555");
+            process3  = Runtime.getRuntime().exec("/home/rashad/Documents/Workspace/Android-IDE/Android-Eclipse/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb connect " + str);
 
+            
+            //Getting phone model and displays it 
             process2 = Runtime.getRuntime().exec("/home/rashad/Documents/Workspace/Android-IDE/Android-Eclipse/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb -s " + str + ":5555" + " shell getprop " + "ro.product.model");
             br2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
 
@@ -313,6 +318,7 @@ public class BT extends javax.swing.JFrame {
 
             }
 
+            //Gets commands
             process = Runtime.getRuntime().exec("/home/rashad/Documents/Workspace/Android-IDE/Android-Eclipse/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb -s " + str + ":5555" + " logcat -s " + "ROV");
             br = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -324,13 +330,14 @@ public class BT extends javax.swing.JFrame {
 
                     jLabel17.setText("Getting Commands..");
 
-                    while ((line = br.readLine()) != null) {
+                 while ((line = br.readLine()) != null) {
 
                         if (line.contains("open1")) {
 
                             System.out.println("open1");
 
-                            Communication.send("o");
+                            dataSent[2] = 60;
+                            dataSent[1] = 1;
 
                             jLabel6.setText("Opening");
 
@@ -339,14 +346,17 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("open0")) {
 
                             System.out.println("open0");
-                            Communication.send("oo");
+                            dataSent[0] = 0;
                             jLabel6.setText("Nothing");
                         }
 
                         if (line.contains("close1")) {
 
                             System.out.println("close1");
-                            Communication.send("c");
+
+                            dataSent[2] = 60;
+                            dataSent[1] = 0;
+
                             jLabel6.setText("Closing");
 
                         }
@@ -354,8 +364,7 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("close0")) {
 
                             System.out.println("close0");
-                            Communication.send("cc");
-
+                            dataSent[0] = 0;
                             jLabel6.setText("Nothing");
 
                         }
@@ -363,14 +372,17 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("up1")) {
 
                             System.out.println("up1");
-                            Communication.send("u");
+
+                            dataSent[2] = 10;
+                            dataSent[1] = 1;
+
                             jLabel4.setText("Up");
                         }
 
                         if (line.contains("up0")) {
 
                             System.out.println("up0");
-                            Communication.send("uu");
+                            dataSent[0] = 0;
                             jLabel4.setText("Nothing");
 
                         }
@@ -378,7 +390,10 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("down1")) {
 
                             jLabel4.setText("Down");
-                            Communication.send("d");
+
+                            dataSent[2] = 20;
+                            dataSent[1] = 0;
+
                             System.out.println("down1");
 
                         }
@@ -386,7 +401,7 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("down0")) {
 
                             jLabel4.setText("Nothing");
-                            Communication.send("dd");
+                            dataSent[0] = 0;
                             System.out.println("down0");
 
                         }
@@ -394,7 +409,10 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("left1")) {
 
                             jLabel5.setText("Left");
-                            Communication.send("l");
+
+                            dataSent[2] = 30;
+                            dataSent[1] = 1;
+
                             System.out.println("left1");
 
                         }
@@ -402,7 +420,7 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("left0")) {
 
                             jLabel5.setText("Nothing");
-                            Communication.send("ll");
+                            dataSent[0] = 0;
                             System.out.println("left0");
 
                         }
@@ -410,7 +428,9 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("right1")) {
 
                             jLabel5.setText("Right");
-                            Communication.send("r");
+
+                            dataSent[2] = 40;
+                            dataSent[1] = 0;
                             System.out.println("right1");
 
                         }
@@ -418,14 +438,13 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("right0")) {
 
                             jLabel5.setText("Nothing");
-                            Communication.send("rr");
+                            dataSent[0] = 0;
                             System.out.println("right0");
 
                         }
 
                         if (line.contains("armu1")) {
                             jLabel6.setText("Up");
-                            Communication.send("au");
                             System.out.println("armu1");
 
                         }
@@ -433,14 +452,16 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("armu0")) {
 
                             jLabel6.setText("Nothing");
-                            Communication.send("auu");
                             System.out.println("armu0");
 
                         }
 
                         if (line.contains("arml1")) {
+
                             jLabel6.setText("Left");
-                            Communication.send("al");
+
+                            dataSent[2] = 50;
+                            dataSent[1] = 1;
 
                             System.out.println("arml1");
                         }
@@ -448,7 +469,7 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("arml0")) {
 
                             jLabel6.setText("Nothing");
-                            Communication.send("all");
+                            dataSent[0] = 0;
                             System.out.println("arml0");
 
                         }
@@ -456,7 +477,6 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("armd1")) {
 
                             jLabel6.setText("Down");
-                            Communication.send("ad");
 
                             System.out.println("armd1");
                         }
@@ -464,28 +484,28 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("armd0")) {
 
                             jLabel6.setText("Nothing");
-                            Communication.send("add");
                             System.out.println("armd0");
 
                         }
 
                         if (line.contains("armr1")) {
                             jLabel6.setText("Right");
-                            Communication.send("ar");
+
+                            dataSent[2] = 50;
+                            dataSent[1] = 0;
+
                             System.out.println("armr1");
                         }
 
                         if (line.contains("armr0")) {
 
                             jLabel6.setText("Nothing");
-                            Communication.send("arr");
                             System.out.println("armr0");
                         }
 
                         if (line.contains("pressure")) {
 
                             jLabel15.setText("getting pressure..");
-                            Communication.send("m");
                             System.out.println("getting pressure..");
 
                         }
@@ -493,7 +513,6 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("temprature")) {
 
                             jLabel14.setText("getting temprature..");
-                            Communication.send("t");
                             System.out.println("getting temprature..");
 
                         }
@@ -501,7 +520,10 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("for")) {
 
                             jLabel4.setText("forward");
-                            Communication.send("f");
+
+                            dataSent[2] = 70;
+                            dataSent[1] = 1;
+
                             System.out.println("for");
 
                         }
@@ -509,7 +531,10 @@ public class BT extends javax.swing.JFrame {
                         if (line.contains("back")) {
 
                             jLabel4.setText("backward");
-                            Communication.send("b");
+
+                            dataSent[2] = 80;
+                            dataSent[1] = 0;
+
                             System.out.println("back");
 
                         }
@@ -529,12 +554,16 @@ public class BT extends javax.swing.JFrame {
                                 if (i % 2 == 0) {
 
                                     System.out.println(m.group());
+
                                     jLabel8.setText(m.group() + " PWM");
-                                    Communication.send("s" + m.group());
+
+                                    dataSent[0] = (byte) Integer.parseInt("" + m.group());
 
                                     if (m.group().equals("0")) {
 
-                                        jLabel4.setText("Nothing");
+                                        jLabel4.setText("Stops");
+
+                                        dataSent[0] = 0;
 
                                     }
 
@@ -545,6 +574,9 @@ public class BT extends javax.swing.JFrame {
                             }
 
                         }
+
+                        
+                        Communication.send(dataSent);
 
                     }
 

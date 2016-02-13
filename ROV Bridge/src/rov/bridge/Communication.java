@@ -9,7 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author rashad
+ * 
+ * @author mohamed rashad
+ * 
  */
 
 public class Communication {
@@ -30,7 +32,7 @@ public class Communication {
     }
 
     /**
-     * @param c
+     * @param data
      * @throws java.net.SocketException
      *
      * this method takes those parameters and initiate the datagram socket opens
@@ -39,15 +41,17 @@ public class Communication {
      *
      */
     
-    public static void send(String c) throws SocketException, IOException {
+    public static void send(byte[] data) throws SocketException, IOException {
 
-        sendData = c.getBytes();
+        sendData = data;
 
         serverSocket = new DatagramSocket(9876);
 
-        IPAddress = InetAddress.getByName("192.168.1.1");
+        IPAddress = InetAddress.getByName("192.168.1.20");
+        
         sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
         serverSocket.send(sendPacket);
+        serverSocket.close();
 
     }
 
@@ -73,7 +77,8 @@ public class Communication {
                         serverSocket = new DatagramSocket(9876);
                         receivePacket = new DatagramPacket(receiveData, receiveData.length);
                         serverSocket.receive(receivePacket);
-
+                        
+                        serverSocket.close();
                         //starts processing the data 
                         String message = new String(receivePacket.getData());
 

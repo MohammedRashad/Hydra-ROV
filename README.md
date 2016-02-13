@@ -55,13 +55,15 @@ An app that makes it possible to control an ROV (underwater Robot) via android
         
         - Processes Data and send signals to motors/sensors
         
+        - Sends PWM values to secondary PIC then to motors
+        
         - Recieve data from sensors
         
         - Send data to PC via ENC28J60 Chip 
        
         - Data Transmission is via UDP
        
-        - Written in MikroC
+        - Written in MikroC (MikroElectronica Embdedded C compiler)
         
 
 =============================================================

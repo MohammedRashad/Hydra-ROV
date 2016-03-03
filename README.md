@@ -65,7 +65,7 @@ An app that makes it possible to control an ROV (underwater Robot) via android
        
         - Written in MikroC (MikroElectronica Embdedded C compiler)
         
-- Arduino App :
+- Arduino Board App :
 
         - Backup to PIC Microcontroller
         - Simple sketch to recieve data on serial port and process data 

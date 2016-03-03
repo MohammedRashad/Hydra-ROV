@@ -14,7 +14,7 @@ An app that makes it possible to control an ROV (underwater Robot) via android
 
    - Android controller.
    - PC Bridge.
-   - PIC Microcontroller app.
+   - PIC Microcontroller app. (Arduino app as backup)
 
 **Work Flow :-**
 
@@ -45,7 +45,7 @@ An app that makes it possible to control an ROV (underwater Robot) via android
 
         - Connects with android via ADB and reads logcat stream
 
-        - Sends data to robot via Ethernet cable using UDP
+        - Sends data to robot via Ethernet cable using UDP (or Serial Port in case of Arduino)
 
         - Written in Java 
 
@@ -65,7 +65,11 @@ An app that makes it possible to control an ROV (underwater Robot) via android
        
         - Written in MikroC (MikroElectronica Embdedded C compiler)
         
+- Arduino App :
 
+        - Backup to PIC Microcontroller
+        - Simple sketch to recieve data on serial port and process data 
+        - Envoking actions according to sent data
 =============================================================
 
 Code is available for educational purposes and you may re-use it according to the terms of the license.

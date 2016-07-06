@@ -248,7 +248,7 @@ void gearMotor(char direction){
     
 void servo(char direction){
 
-
+//TODO Add the code controlling gripper
 
 
 }

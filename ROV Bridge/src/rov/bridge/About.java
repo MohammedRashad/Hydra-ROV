@@ -1,13 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Copyright (C) 2016 root
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+
 package rov.bridge;
 
 /**
  * @author rashad
  */
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -27,53 +41,63 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 
+
+
 public class About extends JDialog {
 
+    
     private static final long serialVersionUID = 1L;
+    
     static int newH, newW;
+    static About aboutDialog;
+    static Dimension dim;
 
-    JRootPane rootPane = new JRootPane();
-    InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-    KeyStroke stroke = KeyStroke.getKeyStroke("ESCAPE");
+    JPanel messagePane;
+    JPanel buttonPane;
+    JRootPane rootPane;
+    JButton button;
+    
+    InputMap inputMap;
+    KeyStroke stroke;
+    Action action;
+    Point p;
 
+    
     public About(JFrame parent, String title, String message) {
         super(parent, title);
 
-        // set the position of the window
-        Point p = new Point(400, 400);
+        p = new Point(400, 400);
         setLocation(p.x, p.y);
 
-        // Create a message
-        JPanel messagePane = new JPanel();
+        messagePane = new JPanel();
         messagePane.add(new JLabel(message));
 
-		// get content pane, which is usually the
-        // Container of all the dialog's components.
+        buttonPane = new JPanel();
+        button = new JButton("We're Awesome");
+        
+        
         getContentPane().add(messagePane);
 
-        // Create a button
-        JPanel buttonPane = new JPanel();
-        JButton button = new JButton("We're Awesome");
         buttonPane.add(button);
-
-        // set action listener on the button
         button.addActionListener(new MyActionListener());
+        
         getContentPane().add(buttonPane, BorderLayout.PAGE_END);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
         pack();
+        
         setVisible(true);
 
     }
 
-	// override the createRootPane inherited by the JDialog, to create the rootPane.
-    // create functionality to close the window when "Escape" button is pressed
+   
     @Override
     public JRootPane createRootPane() {
 
         rootPane = new JRootPane();
         stroke = KeyStroke.getKeyStroke("ESCAPE");
 
-        Action action = new AbstractAction() {
+        action = new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,18 +108,44 @@ public class About extends JDialog {
             }
         };
 
+        
         inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(stroke, "ESCAPE");
         rootPane.getActionMap().put("ESCAPE", action);
+        
         return rootPane;
+      
+    }
+
+    
+    private static void setDialogLocation() {
+        
+        dim = Toolkit.getDefaultToolkit().getScreenSize();
+        newW = dim.width / 2 - aboutDialog.getSize().width / 2;
+        newH = dim.height / 2 - aboutDialog.getSize().height / 2;
+        aboutDialog.setLocation(newW, newH);
+
+    }
+    
+
+        private static void createDialog() {
+        
+        aboutDialog = new About(new JFrame(), "ADMIRAL TEAM", "We are a team of engineering students in Suez Canal University.We Build Underwater Robots.");
+        aboutDialog.setSize(700, 80);
 
     }
 
-	// an action listener to be used when an action is performed
-    // (e.g. button is pressed)
-    class MyActionListener implements ActionListener {
+        
+    public static void main(String[] a) {
 
-        //close and dispose of the window.
+        createDialog();
+        setDialogLocation();
+
+    }
+
+    
+     class MyActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -104,18 +154,7 @@ public class About extends JDialog {
 
         }
     }
-
-    public static void main(String[] a) {
-
-        About dialog = new About(new JFrame(), "ADMIRAL TEAM", "We are a team of engineering students in Suez Canal University.\nWe Build Robots. ");
-        
-        // set the size of the window
-        dialog.setSize(600, 70);
-
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        newW = dim.width / 2 - dialog.getSize().width / 2;
-        newH = dim.height / 2 - dialog.getSize().height / 2;
-        dialog.setLocation(newW, newH);
-
-    }
+     
 }
+
+

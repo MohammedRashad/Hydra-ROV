@@ -2,204 +2,179 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e0f2f1"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="10dp"
+    android:background="#263238"
     android:paddingBottom="7dp"
-
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="10dp"
     tools:context=".MainActivity">
 
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/forward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#009688"
-        android:text="UP"
-        android:textColor="#ffc107"
-        android:layout_marginBottom="3dp"
-        android:layout_alignBaseline="@+id/button3"
-        android:layout_alignBottom="@+id/button3"
+        android:background="#0D47A1"
+        android:text="forward"
+        android:layout_below="@+id/speed"
+        android:layout_toRightOf="@+id/plus"
+        android:layout_toEndOf="@+id/plus" />
+
+    <Button
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="left"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+
+        android:background="#0D47A1"
+        android:text="right"
+        android:layout_above="@+id/backward"
+        android:layout_toRightOf="@+id/backward"
+        android:layout_toEndOf="@+id/backward" />
+
+    <Button
+        android:id="@+id/backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="backward"
+        android:layout_below="@+id/left"
+        android:layout_alignLeft="@+id/forward"
+        android:layout_alignStart="@+id/forward" />
+
+    <Button
+        android:id="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="up"
+        android:layout_alignTop="@+id/down"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="down"
+        android:layout_alignTop="@+id/plus"
+        android:layout_toRightOf="@+id/right"
+        android:layout_toEndOf="@+id/right" />
+
+    <Button
+        android:id="@+id/open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="open"
+        android:layout_below="@+id/close"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/arml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="Arm l"
+        android:layout_alignTop="@+id/armr"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <Button
+        android:id="@+id/armr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="arm R"
+        android:layout_below="@+id/open"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="#0D47A1"
+        android:text="close"
+        android:layout_alignTop="@+id/forward"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0D47A1"
+        android:text="-"
+        android:textSize="25dp"
+        android:layout_alignTop="@+id/down"
+        android:layout_alignLeft="@+id/forward"
+        android:layout_alignStart="@+id/forward" />
+
+    <Button
+        android:id="@+id/plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:background="#009688"
-        android:text="LEFT"
-        android:textColor="#ffc107" />
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="49dp"
+        android:background="#0D47A1"
+        android:text="+"
+        android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentEnd="true"
-        android:background="#009688"
-        android:text="DOWN"
-        android:layout_marginBottom="3dp"
-
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button3"
-        android:background="#009688"
-        android:text="Right"
-        android:textColor="#ffc107" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/button">
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button2"
-            android:layout_alignBottom="@+id/button2"
-            android:layout_centerHorizontal="true"
-            android:checked="false"
-            android:text="Forward" />
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/radioButton2"
-            android:layout_alignStart="@+id/radioButton2"
-            android:checked="false"
-            android:text="Backward" />
-    </RadioGroup>
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/radioGroup"
-        android:layout_marginStart="18dp"
-        android:layout_toEndOf="@+id/radioGroup"
-        android:indeterminate="false"
-        android:max="255"
-        android:progress="1" />
+        android:layout_alignBottom="@+id/plus"
+        android:layout_marginStart="33dp"
+        android:layout_toEndOf="@+id/plus"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="36dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar"
-        android:layout_alignStart="@+id/seekBar"
-        android:text="Set Speed By PWM :"
-        android:textColor="#000000" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/radioGroup"
-        android:layout_marginTop="28dp"
-        android:layout_toEndOf="@+id/button"
-        android:background="#009688"
-        android:text="Arm Left"
-        android:layout_marginBottom="3dp"
-        android:layout_marginRight="3dp"
-
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button5"
-        android:layout_toEndOf="@+id/button5"
-        android:background="#009688"
-        android:text="Arm Right"
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button10"
-        android:layout_toStartOf="@+id/button8"
-        android:background="#009688"
-        android:text="Arm up"
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button7"
-        android:layout_toStartOf="@+id/button3"
-        android:background="#009688"
-        android:text="ARM Down"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="3dp"
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button5"
-        android:layout_below="@+id/button5"
-        android:background="#009688"
-        android:text="Arm Close"
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button6"
-        android:layout_toStartOf="@+id/button3"
-        android:background="#009688"
-        android:layout_marginTop="3dp"
-        android:text="Arm open"
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button12"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#009688"
-        android:text="Pressure"
-        android:layout_marginBottom="3dp"
+        android:text="MetaRobotics Control App"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
 
-        android:textColor="#ffc107" />
-
-    <Button
-        android:id="@+id/button12"
-        style="?android:attr/buttonStyleSmall"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button2"
-        android:background="#009688"
-        android:text="Temprature"
-        android:textColor="#ffc107"
-        android:layout_alignStart="@+id/button11"
-        android:layout_alignEnd="@+id/button11" />
-
-    <CheckedTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New CheckedTextView"
-        android:id="@+id/checkedTextView"
-        android:layout_below="@+id/button2"
-        android:layout_toStartOf="@+id/seekBar"
-        android:layout_marginTop="65dp" />
-
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Arm"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/arml"
+        android:layout_alignLeft="@+id/open"
+        android:layout_alignStart="@+id/open" />
 
 </RelativeLayout>

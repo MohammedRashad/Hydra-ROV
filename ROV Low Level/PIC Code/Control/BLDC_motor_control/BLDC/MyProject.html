@@ -1,0 +1,108 @@
+Version:0.9
+StartHTML:0000000105
+EndHTML:0000018053
+StartFragment:0000001499
+EndFragment:0000018037
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>mikroIDE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+body { font-family: Courier New; font-size: 14pt; }
+.cpp1-activecomment { color: #316AC5; font-style: italic; text-decoration: underline; }
+.cpp1-assembler { color: #FF0000; }
+.cpp1-binary { color: #0000FF; }
+.cpp1-character { color: #FEA601; }
+.cpp1-comment { color: #008000; font-style: italic; }
+.cpp1-float { color: #800000; }
+.cpp1-hexadecimal { color: #008000; }
+.cpp1-identifier { color: #000000; }
+.cpp1-illegalchar { color: #FF0000; }
+.cpp1-imagelink { color: #800080; font-style: italic; text-decoration: underline; }
+.cpp1-number { color: #008000; }
+.cpp1-octal { color: #800080; }
+.cpp1-preprocessor { color: #8000FF; font-style: italic; }
+.cpp1-reservedword { color: #800000; font-weight: bold; }
+.cpp1-space { color: #FFFFFF; }
+.cpp1-string { color: #FEA601; }
+.cpp1-symbol { color: #000000; }
+.cpp1-weblink { color: #316AC5; font-style: italic; text-decoration: underline; }
+-->
+</style>
+</head>
+<body>
+<!--StartFragment--><pre><code><span class="cpp1-comment">//Sensored&nbsp;BLDC&nbsp;Motor&nbsp;Control&nbsp;Using&nbsp;PIC16F877A
+//Used&nbsp;microcontrooler:&nbsp;PIC16F877A&nbsp;@&nbsp;12MHz
+//Written&nbsp;by:&nbsp;BENCHEROUDA&nbsp;Okba
+//</span><span class="cpp1-weblink">http://www.elecnote.blogspot.com
+</span><span class="cpp1-comment">//electronnote@gmail.com
+//All&nbsp;rights&nbsp;reserved
+//Use&nbsp;at&nbsp;your&nbsp;own&nbsp;risk
+
+</span><span class="cpp1-reservedword">unsigned</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">short</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">hall;
+</span><span class="cpp1-reservedword">unsigned</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">char</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">MoveTable[</span><span class="cpp1-number">8</span><span class="cpp1-symbol">]</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">{</span><span class="cpp1-number">0</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">33</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">6</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">36</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">24</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">9</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">18</span><span class="cpp1-symbol">,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">};
+</span><span class="cpp1-reservedword">unsigned</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">dt,</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">dt0;
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">Interrupt(){
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(INTF_bit){</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//External&nbsp;Interrupt&nbsp;occurred
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">INTCON</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Disable&nbsp;all&nbsp;interrupts
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PORTB.F2</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PORTD</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PWM1_Stop();
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">(TMR1IF_bit){</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Timer1&nbsp;Interrupt&nbsp;occurred
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1IF_bit</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1H</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x6D</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1L</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x84</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">dt</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">ADC_Read(</span><span class="cpp1-number">0</span><span class="cpp1-symbol">);</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Read&nbsp;analog&nbsp;value
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">(dt</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">!=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">dt0)</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">dt0</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">dt;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">dt0</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">dt0</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">&gt;&gt;</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">2</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PWM1_Set_Duty(dt0);
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PWM1_Start();</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">if</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">(RBIF_bit){</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Pin&nbsp;change&nbsp;Interrupt&nbsp;occurred
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">RBIF_bit</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">PORTB;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">&amp;</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">112</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">&gt;&gt;</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">4</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PORTD</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">MoveTable[hall];
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-symbol">}
+}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">InitInterrupts(){
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">OPTION_REG</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">T1CON</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x31</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1IF_bit</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1H</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x6D</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1L</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0x84</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">TMR1IE_bit</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">INTCON</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Disable&nbsp;all&nbsp;interrupts
+</span><span class="cpp1-symbol">}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">main()</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">ADCON1</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">14</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//&nbsp;Configure&nbsp;AN0&nbsp;as&nbsp;analog
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">CMCON</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">7</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Disable&nbsp;comparators
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">PORTB</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;
+&nbsp;</span><span class="cpp1-identifier">TRISB</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">243</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">PORTD</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">TRISD</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">InitInterrupts();
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">PWM1_Init(</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">);
+
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(</span><span class="cpp1-number">1</span><span class="cpp1-symbol">){
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(PORTB.F1);</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//wait&nbsp;for&nbsp;start&nbsp;key&nbsp;hit
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(!PORTB.F1);</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-comment">//&nbsp;wait&nbsp;till&nbsp;key&nbsp;is&nbsp;released
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PORTB.F2</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">PORTB;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">&amp;</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">112</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">hall</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">&gt;&gt;</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-number">4</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PORTD</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-identifier">MoveTable[hall];
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">INTCON</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="cpp1-symbol">=</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-hexadecimal">0xD8</span><span class="cpp1-symbol">;</span><span class="cpp1-space">&nbsp;&nbsp;&nbsp;</span><span class="cpp1-comment">//Enable&nbsp;all&nbsp;interrupts
+</span><span class="cpp1-space">&nbsp;&nbsp;</span><span class="cpp1-identifier">PWM1_Start();
+</span><span class="cpp1-space">&nbsp;</span><span class="cpp1-symbol">}
+}
+</span></code></pre><!--EndFragment--></body>
+</html>

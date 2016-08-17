@@ -1,0 +1,8 @@
+main
+	__CC2DW
+	Init
+		UART1_Init
+		Delay_100ms
+		Init_Motors
+	Motors_Signal
+interrupt

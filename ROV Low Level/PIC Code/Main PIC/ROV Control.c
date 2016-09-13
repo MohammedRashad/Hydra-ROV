@@ -91,17 +91,15 @@ void motorUp(char direction , char speed){
              PORTD.B7 = 1;
              PORTB.B7 = 0;
              
+             
+             
+             PORTA.B1 = 1;
+             PORTA.B2 = 1;
+             
+             
    }
    
-   PWMsetting[0] = speed;
-   PWMsetting[1] = speed;
-   PWMsetting[2] = 0;
-   PWMsetting[3] = 0;
-
-   UART1_Write(PWMsetting[0]);
-   UART1_Write(PWMsetting[1]);
-   UART1_Write(PWMsetting[2]);
-   UART1_Write(PWMsetting[3]);
+ 
 
 }
 
@@ -116,17 +114,9 @@ void motorDown(char direction , char speed){
          PORTD.B7 = 0;
          PORTB.B7 = 1;
 
-   
-         PWMsetting[0] = speed;
-         PWMsetting[1] = speed;
-         PWMsetting[2] = 0;
-         PWMsetting[3] = 0;
-   
-         UART1_Write(PWMsetting[0]);
-         UART1_Write(PWMsetting[1]);
-         UART1_Write(PWMsetting[2]);
-         UART1_Write(PWMsetting[3]);
-   
+             PORTA.B1= 1;
+             PORTA.B2 = 1;
+ 
    }
 }
 
@@ -140,15 +130,9 @@ void motorLeft(char direction , char speed){
              PORTD.B4 = 1;
              PORTD.B2 = 0;
 
-             PWMsetting[2] = 0;
-             PWMsetting[3] = speed;
-             PWMsetting[1] = 0;
-             PWMsetting[0] = 0;
 
-            UART1_Write(PWMsetting[0]);
-            UART1_Write(PWMsetting[1]);
-            UART1_Write(PWMsetting[2]);
-            UART1_Write(PWMsetting[3]);
+             PORTA.B3 = 1;
+             PORTA.B4 = 1;
    
    }
    
@@ -165,15 +149,8 @@ void motorRight(char direction , char speed){
              PORTD.B2 = 1;
 
 
-              PWMsetting[2] = speed;
-              PWMsetting[3] = 0;
-              PWMsetting[1] = 0;
-              PWMsetting[0] = 0;
-
-            UART1_Write(PWMsetting[0]);
-   UART1_Write(PWMsetting[1]);
-   UART1_Write(PWMsetting[2]);
-   UART1_Write(PWMsetting[3]);
+             PORTA.B3 = 1;
+             PORTA.B4 = 1;
               
    }
 
@@ -209,17 +186,8 @@ void gearMotor(char direction){
              PORTD.B4 = 1;
              PORTD.B2 = 0;
              
-             PWMsetting[0] = speed;
-             PWMsetting[1] = speed;
-             PWMsetting[2] = 0;
-             PWMsetting[3] = 0;
-
-             UART1_Write(PWMsetting[0]);
-             UART1_Write(PWMsetting[1]);
-             UART1_Write(PWMsetting[2]);
-             UART1_Write(PWMsetting[3]);
-
-             
+             PORTA.B3 = 1;
+             PORTA.B4 = 1;
             }
     
     }
@@ -235,15 +203,8 @@ void gearMotor(char direction){
              PORTD.B4 = 0;
              PORTD.B2 = 1;
         
-             PWMsetting[0] = speed;
-             PWMsetting[1] = speed;
-             PWMsetting[2] = 0;
-             PWMsetting[3] = 0;
-
-             UART1_Write(PWMsetting[0]);
-   UART1_Write(PWMsetting[1]);
-   UART1_Write(PWMsetting[2]);
-   UART1_Write(PWMsetting[3]);
+             PORTA.B3 = 1;
+             PORTA.B4 = 1;
 
         }
 
@@ -346,7 +307,7 @@ void main() {
    
    }
    
-   //Arm grabber
+   //Arm gripper
    if(recievedData[0] == 60){
    
      servo(recievedData[1]);

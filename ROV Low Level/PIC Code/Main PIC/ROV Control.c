@@ -2,14 +2,9 @@
 /**
 
   Android to PIC ROV Controller (Microcontroller code)
-  
-  
-  @author Ahmed mahmoud
-  @author Hossam mahmoud
-  @author Ibrahim Adel
+ 
   @author Mohamed Rashad
-  @author Mohamed husseni
-  
+   
   Date : 12/2/2016
   
 **/
@@ -88,7 +83,7 @@ void motorUp(char direction , char speed){
              PORTB.B5 = 1;
              PORTB.B4 = 0;
 
-             PORTD.B7 = 1;
+             PORTD.B6 = 1;
              PORTB.B7 = 0;
              
              
@@ -111,11 +106,11 @@ void motorDown(char direction , char speed){
          PORTB.B5 = 0;
          PORTB.B4 = 1;
 
-         PORTD.B7 = 0;
+         PORTD.B6 = 0;
          PORTB.B7 = 1;
 
-             PORTA.B1= 1;
-             PORTA.B2 = 1;
+         PORTA.B1= 1;
+         PORTA.B2 = 1;
  
    }
 }

@@ -33,7 +33,7 @@ An app that makes it possible to control an ROV (underwater Robot) via android
 
         - A simple user interface consists of buttons for control and seekbar for speed
         - When interacting with UI the app writes to logcat stream
-        - Written in Java
+        - Written in Android Java
 
 - PC Bridge :
 

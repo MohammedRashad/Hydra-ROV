@@ -27,8 +27,7 @@ sfr sbit SPI_Ethernet_CS_Direction  at TRISC1_bit;
 unsigned char myMacAddr[6] = {0x00, 0x14, 0xA5, 0x76, 0x19, 0x3f};
 unsigned char myIpAddr[4] = { 192 , 168 , 1 , 20 };
 unsigned char recievedData[3]  = {0 , 0 , 0};  //motor,direction,speed
-char PWMsetting[4] = {0,0,0,0};
-
+ 
 
 //Structure needed for carrying flags needed for communication
 typedef struct {

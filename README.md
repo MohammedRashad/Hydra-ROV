@@ -3,11 +3,10 @@
 An app that makes it possible to control an ROV (underwater Robot) via android
 
 # Notes
-**This project is work for Gunners Team (Faculty of Engineering, Suez Canal University).**
+- This project is work for Gunners Team (Faculty of Engineering, Suez Canal University).
+- This project was made for International UGV competition.
 
-**This project was made for International UGV competition.**
-
-#Project Structure 
+# Project Structure 
 
 ### This project consists of 3 stages :-
 

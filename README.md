@@ -2,21 +2,20 @@
 
 An app that makes it possible to control an ROV (underwater Robot) via android
 
-===================================
+# Notes
+**This project is work for Gunners Team (Faculty of Engineering, Suez Canal University).**
 
-**This project is work for Admiral Team (Faculty of Engineering, Suez Canal University).**
+**This project was made for International UGV competition.**
 
-**This project was made for MATE ROV competition.**
+#Project Structure 
 
-===================================
-
-**This project consists of 3 stages :-**
+### This project consists of 3 stages :-
 
    - Android controller.
    - PC Bridge.
    - PIC Microcontroller app. (Arduino app as backup)
 
-**Work Flow :-**
+### Work Flow :
 
 - Via any android phone you can control the robot via usb cable to PC or wifi/bluetooth network.
 
@@ -27,7 +26,7 @@ An app that makes it possible to control an ROV (underwater Robot) via android
 - PIC (Arduino) can send signals from sensors to PC Bridge via UDP / Serial Port.
 
 
-**Project Building Blocks :-**
+### Project Building Blocks :
 
 - Android App :
 
@@ -56,8 +55,9 @@ An app that makes it possible to control an ROV (underwater Robot) via android
         - Backup to PIC Microcontroller
         - Simple sketch to recieve data on serial port and process data 
         - Envoking actions according to sent data
-=============================================================
 
+
+# License 
 Code is available for educational purposes and you may re-use it according to the terms of the license.
 
 **Project is signed under GNU Public License v3.0**
